@@ -20,7 +20,9 @@ class App extends React.Component {
 			<div className="search">
 			  <form>
 				<input id="search" type="text" placeholder="e.g: The Catcher in the Rye"></input>
-				<button>Find a book</button>
+				<button id="searchButton">Find a book</button>
+				<button id="addToMyBooks">Add book to my shelf</button>
+				<button id="addToSavedBooks">Add book to saved books</button>
 			  </form>
 			</div>
 		</div>
