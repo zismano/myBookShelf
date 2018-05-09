@@ -6,8 +6,8 @@ import Search from './search.jsx';
 const axios = require('axios');
 
 class App extends React.Component {
-	constructor() {
-	  super();
+	constructor(props) {
+	  super(props);
 	  this.state = {
 	  	myBooks: ['The Catcher in the Rye', '1984', 'Girl, Gone'],
 	  	savedBooks: ['Needful things', 'Trilogy of the century']
@@ -28,6 +28,12 @@ class App extends React.Component {
 		.catch(err => {
 			console.log(err);
 		})
+
+	}
+
+	addBookToShelf(shelf, book) {
+		let currBooks = this.state[shelf];
+		this.setState({ shelf: [...currBooks, book] });		
 	}
 
 	render() {
