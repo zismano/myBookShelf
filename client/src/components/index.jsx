@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import MyBookList from './MyBookList.jsx';
 import Search from './search.jsx';
 
 const axios = require('axios');
 
-class App extends React.Component {
+class App extends Component {
 	constructor(props) {
 	  super(props);
 	  this.state = {
@@ -17,9 +17,9 @@ class App extends React.Component {
 	}
 
 	getBook(searchString) {
-		axios.get('/search', { 
-			params: { 
-				search: searchString 
+		axios.get('/search', {
+			params: {
+				search: searchString
 			},
 		})
 		.then(res => {
@@ -33,7 +33,7 @@ class App extends React.Component {
 
 	addBookToShelf(shelf, book) {
 		let currBooks = this.state[shelf];
-		this.setState({ shelf: [...currBooks, book] });		
+		this.setState({ shelf: [...currBooks, book] });
 	}
 
 	render() {
