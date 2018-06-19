@@ -10,7 +10,8 @@ class App extends Component {
 	  super(props);
 	  this.state = {
 	  	myBooks: ['The Catcher in the Rye', '1984', 'Girl, Gone'],
-	  	savedBooks: ['Needful things', 'Trilogy of the century']
+	  	savedBooks: ['Needful things', 'Trilogy of the century'],
+			currBook: '',
 	  }
 
 	  this.getBook = this.getBook.bind(this);
@@ -22,8 +23,9 @@ class App extends Component {
 				search: searchString
 			},
 		})
-		.then(res => {
-			console.log('hi');
+		.then(book => {
+			console.log(book);
+			this.setState({ currBook: book.data.volumeInfo });
 		})
 		.catch(err => {
 			console.log(err);
@@ -37,6 +39,13 @@ class App extends Component {
 	}
 
 	render() {
+		const {
+			myBooks,
+			currBook,
+		} = this.state;
+
+		let isCurrBooks = currBook !== '' ? true : false;
+
 	  return (
 		<div>
 			<h1>Welcome to my bookshelf</h1>
@@ -45,8 +54,21 @@ class App extends Component {
 			<div className="search">
 			  <Search getBook={this.getBook} />
 			</div>
-			<button id="addToMyBooks">Add book to my shelf</button>
-			<button id="addToSavedBooks">Add book to saved books</button>
+			<button id="addToMyBooks">Add Book to Shelf</button>
+			<button id="addToSavedBooks">Add Book to Saved</button>
+			<button id="moveFromSavedBooksToMyBooks">Move Book to Shelf</button>
+			<button id="moveFromMyBooksToSavedBooks">Move Book to Saved</button>
+			{isCurrBooks ? (
+				<div className="book-found">
+						<h2>Book Found </h2>
+						<h3>{currBook.title} By {currBook.authors[0]}</h3>
+						<h4>Categories: {currBook.categories[0]}</h4>
+						<h4>Published: {currBook.publishedDate}</h4>
+						<img src={currBook.imageLinks.thumbnail}></img>
+				</div>
+					) : (
+						<div>Book not found</div>
+				)}
 		</div>
 	  )
 	}
