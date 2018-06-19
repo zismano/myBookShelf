@@ -2,9 +2,17 @@ const {googleKey} = require('../config');
 
 let https = require('https');
 
-const findBookByTitleFromAPI = title =>
-	new Promise((resolve, reject) => {
-		https.get(`https://www.googleapis.com/books/v1/volumes?q=${title}&key=${googleKey}`, (res) => {
+const findBookFromAPI = (title, author) => {
+	let request =  `https://www.googleapis.com/books/v1/volumes?q=`;
+	if (title && author) {
+		request += `title:${title}&inauthor:${author}&key=${googleKey}`;
+	} else if (title) {
+		request += `title:${title}&key=${googleKey}`;
+	} else if (author) {
+		request += `${author}&key=${googleKey}`;
+	}
+	return new Promise((resolve, reject) => {
+		 https.get(request, (res) => {
 			if (res.statusCode === 200) {
 				var rawData = '';
 				res.on('data', chunk => {
@@ -25,7 +33,7 @@ const findBookByTitleFromAPI = title =>
 			}
 		})
 	});
-
+}
 module.exports = {
-	findBookByTitleFromAPI,
+	findBookFromAPI,
 }
