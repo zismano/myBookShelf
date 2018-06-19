@@ -17,15 +17,16 @@ class App extends Component {
 	  this.getBook = this.getBook.bind(this);
 	}
 
-	getBook(searchString) {
+	getBook(title, author) {
 		axios.get('/search', {
 			params: {
-				search: searchString
+				title,
+				author
 			},
 		})
 		.then(book => {
-			console.log(book);
-			this.setState({ currBook: book.data.volumeInfo });
+			console.log(book.data);
+			this.setState({ currBook: book.data[0].volumeInfo });
 		})
 		.catch(err => {
 			console.log(err);
@@ -62,7 +63,11 @@ class App extends Component {
 				<div className="book-found">
 						<h2>Book Found </h2>
 						<h3>{currBook.title} By {currBook.authors[0]}</h3>
-						<h4>Categories: {currBook.categories[0]}</h4>
+						{currBook.categories ? (
+							<h4>Categories: {currBook.categories[0]}</h4>
+						) : (
+							<h4></h4>
+						)}
 						<h4>Published: {currBook.publishedDate}</h4>
 						<img src={currBook.imageLinks.thumbnail}></img>
 				</div>
