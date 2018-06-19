@@ -1,6 +1,6 @@
 import React from 'react';
 
-let MyBookEntry = props => {
+let BookEntry = props => {
 	return (
 		<div>
 			<li>{props.BookEntry}</li>
@@ -8,4 +8,4 @@ let MyBookEntry = props => {
 	)
 }
 
-export default MyBookEntry;
+export default BookEntry;
