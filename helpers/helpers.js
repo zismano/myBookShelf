@@ -34,6 +34,19 @@ const findBookFromAPI = (title, author) => {
 		})
 	});
 }
+
+
+const createBookObject = book => {
+	let bookObject = {
+		title: book.volumeInfo.title,
+		author: book.volumeInfo.authors[0],
+		publishedDate: book.volumeInfo.publishedDate,
+		thumbnail: book.volumeInfo.imageLinks.thumbnail
+	}
+	return bookObject;
+}
+
+
 module.exports = {
 	findBookFromAPI,
 }

@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import BookList from './BookList.jsx';
 import Search from './search.jsx';
 import DisplaySearchedBook from './DisplaySearchedBook.jsx';
+const {createBookObject} = require('../../../helpers/helpers');
 
 const axios = require('axios');
 
@@ -67,18 +68,9 @@ class App extends Component {
 	}
 
 	addBookToShelf(index, shelf) {
-		let bookToAdd = this.createBookObject(this.state.searchResults[index]);
+		let bookToAdd = createBookObject(this.state.searchResults[index]);
 		let currBooks = this.state[shelf].push(bookToAdd);
 		this.setState({ shelf: currBooks });
-	}
-
-	createBookObject(book) {
-		return {
-			title: book.volumeInfo.title,
-			author: book.volumeInfo.authors[0],
-			publishedDate: book.volumeInfo.publishedDate,
-			thumbnail: book.volumeInfo.imageLinks.thumbnail
-		}
 	}
 
 	render() {
