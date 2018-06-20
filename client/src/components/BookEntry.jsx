@@ -1,9 +1,15 @@
 import React from 'react';
 
 let BookEntry = props => {
+	let {
+		title,
+		author,
+		publishedDate,
+		img,
+	} = props.BookEntry;
 	return (
 		<div>
-			<li>{props.BookEntry}</li>
+			<li>{title} By {author}</li>
 		</div>
 	)
 }
