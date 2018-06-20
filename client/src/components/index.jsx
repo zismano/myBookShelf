@@ -45,6 +45,7 @@ class App extends Component {
 	  }
 
 	  this.getBook = this.getBook.bind(this);
+		this.addBookToShelf = this.addBookToShelf.bind(this);
 	}
 
 	getBook(title, author) {
@@ -66,9 +67,18 @@ class App extends Component {
 	}
 
 	addBookToShelf(index, shelf) {
-		let bookToAdd = this.state.searchResults[index];
-		let currBooks = this.state[shelf];
-		this.setState({ shelf: [...currBooks, book] });
+		let bookToAdd = this.createBookObject(this.state.searchResults[index]);
+		let currBooks = this.state[shelf].push(bookToAdd);
+		this.setState({ shelf: currBooks });
+	}
+
+	createBookObject(book) {
+		return {
+			title: book.volumeInfo.title,
+			author: book.volumeInfo.authors[0],
+			publishedDate: book.volumeInfo.publishedDate,
+			thumbnail: book.volumeInfo.imageLinks.thumbnail
+		}
 	}
 
 	render() {
@@ -93,7 +103,7 @@ class App extends Component {
 			<button id="moveFromUnreadBooksToSavedBooks">Move Book to Saved</button>
 			<DisplaySearchedBook
 				searchedBookResults={searchResults}
-				addBook={this.props.addBookToShelf}
+				addBook={this.addBookToShelf}
 			/>
 		</div>
 	  )
