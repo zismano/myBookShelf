@@ -41,7 +41,7 @@ const createBookObject = book => {
 		title: book.volumeInfo.title,
 		author: book.volumeInfo.authors[0],
 		publishedDate: book.volumeInfo.publishedDate,
-		thumbnail: book.volumeInfo.imageLinks.thumbnail
+		thumbnail: book.volumeInfo.imageLinks.thumbnail,
 	}
 	return bookObject;
 }
@@ -49,4 +49,5 @@ const createBookObject = book => {
 
 module.exports = {
 	findBookFromAPI,
+	createBookObject
 }
