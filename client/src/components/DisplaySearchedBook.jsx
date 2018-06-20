@@ -20,14 +20,9 @@ const DisplaySearchedBook = props =>
               <img src={volume.imageLinks.thumbnail}></img>
               <br></br>
               <button
-                id="addToUnreadBooks"
-                onclick={(e) => this.props.addBook(i, "unreadBooks")}>
-                Add Book to Unread Book Shelf
-              </button>
-              <button
-                id="addToSavedBooks"
-                onClick={(e) => this.props.addBook(i, "savedBooks")}>
-                Add Book to Saved Book Shelf
+                id="addToMyBooks"
+                onClick={(e) => props.addBook(i, "books")}>
+                Add Book to My Book Shelf
               </button>
             </div>
           )
