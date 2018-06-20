@@ -12,8 +12,34 @@ class App extends Component {
 	constructor(props) {
 	  super(props);
 	  this.state = {
-	  	unreadBooks: ['The Catcher in the Rye', '1984', 'Girl, Gone'],
-	  	savedBooks: ['Needful things', 'Trilogy of the century'],
+	  	unreadBooks: [
+				{
+					title: "1984",
+					author: "George Orwell",
+					publishedDate: "1983-10-17",
+					thumbnail: "http://books.google.com/books/content?id=kotPYEqx7kMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+				},
+				{
+					title: "The Last Man in Europe: A Novel",
+					author: "Dennis Glover",
+					publishedDate: "2017-11-14",
+					thumbnail: "http://books.google.com/books/content?id=E6UxDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+				}
+			],
+	  	savedBooks: [
+				{
+					title: "1984",
+					author: "George Orwell",
+					publishedDate: "1983-10-17",
+					thumbnail: "http://books.google.com/books/content?id=kotPYEqx7kMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+				},
+				{
+					title: "The Last Man in Europe: A Novel",
+					author: "Dennis Glover",
+					publishedDate: "2017-11-14",
+					thumbnail: "http://books.google.com/books/content?id=E6UxDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+				}
+			],
 			searchResults: [],
 			currBook: '',
 	  }
@@ -39,7 +65,8 @@ class App extends Component {
 
 	}
 
-	addBookToShelf(shelf, book) {
+	addBookToShelf(index, shelf) {
+		let bookToAdd = this.state.searchResults[index];
 		let currBooks = this.state[shelf];
 		this.setState({ shelf: [...currBooks, book] });
 	}
@@ -64,7 +91,10 @@ class App extends Component {
 			<Search getBook={this.getBook}/>
 			<button id="moveFromSavedBooksToUnreadBooks">Move Book to Shelf</button>
 			<button id="moveFromUnreadBooksToSavedBooks">Move Book to Saved</button>
-			<DisplaySearchedBook searchedBookResults={searchResults}/>
+			<DisplaySearchedBook
+				searchedBookResults={searchResults}
+				addBook={this.props.addBookToShelf}
+			/>
 		</div>
 	  )
 	}

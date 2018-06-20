@@ -19,8 +19,16 @@ const DisplaySearchedBook = props =>
               <h4>Published: {volume.publishedDate}</h4>
               <img src={volume.imageLinks.thumbnail}></img>
               <br></br>
-              <button id="addToUnreadBooks">Add Book to Unread Book Shelf</button>
-              <button id="addToSavedBooks">Add Book to Saved Book Shelf</button>
+              <button
+                id="addToUnreadBooks"
+                onclick={(e) => this.props.addBook(i, "unreadBooks")}>
+                Add Book to Unread Book Shelf
+              </button>
+              <button
+                id="addToSavedBooks"
+                onClick={(e) => this.props.addBook(i, "savedBooks")}>
+                Add Book to Saved Book Shelf
+              </button>
             </div>
           )
         })}
