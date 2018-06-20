@@ -13,13 +13,18 @@ class BookEntry extends Component {
 			author,
 			publishedDate,
 			thumbnail,
+			status
 		} = this.props.BookEntry;
 
 		return (
-			<div>
+			<div className="book-entry">
 				<li onClick={() =>
 						this.setState({ showDetails: !this.state.showDetails})}
-				>{title} By {author}</li>
+				>{title} By {author}
+				<button className="read-button">Read</button>
+				<button className="unread-button">Unread</button>
+				<button className="remove-button">Remove</button>
+				</li>
 				{this.state.showDetails ? (
 					<div>
 						<h4>Published: {publishedDate}</h4>
