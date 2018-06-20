@@ -13,32 +13,48 @@ class App extends Component {
 	constructor(props) {
 	  super(props);
 	  this.state = {
-	  	unreadBooks: [
+	  	// unreadBooks: [
+			// 	{
+			// 		title: "1984",
+			// 		author: "George Orwell",
+			// 		publishedDate: "1983-10-17",
+			// 		thumbnail: "http://books.google.com/books/content?id=kotPYEqx7kMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+			// 	},
+			// 	{
+			// 		title: "The Last Man in Europe: A Novel",
+			// 		author: "Dennis Glover",
+			// 		publishedDate: "2017-11-14",
+			// 		thumbnail: "http://books.google.com/books/content?id=E6UxDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+			// 	}
+			// ],
+	  	// savedBooks: [
+			// 	{
+			// 		title: "1984",
+			// 		author: "George Orwell",
+			// 		publishedDate: "1983-10-17",
+			// 		thumbnail: "http://books.google.com/books/content?id=kotPYEqx7kMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+			// 	},
+			// 	{
+			// 		title: "The Last Man in Europe: A Novel",
+			// 		author: "Dennis Glover",
+			// 		publishedDate: "2017-11-14",
+			// 		thumbnail: "http://books.google.com/books/content?id=E6UxDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+			// 	}
+			// ],
+			books: [
 				{
 					title: "1984",
 					author: "George Orwell",
 					publishedDate: "1983-10-17",
-					thumbnail: "http://books.google.com/books/content?id=kotPYEqx7kMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+					thumbnail: "http://books.google.com/books/content?id=kotPYEqx7kMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+					status: "read"
 				},
 				{
 					title: "The Last Man in Europe: A Novel",
 					author: "Dennis Glover",
 					publishedDate: "2017-11-14",
-					thumbnail: "http://books.google.com/books/content?id=E6UxDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-				}
-			],
-	  	savedBooks: [
-				{
-					title: "1984",
-					author: "George Orwell",
-					publishedDate: "1983-10-17",
-					thumbnail: "http://books.google.com/books/content?id=kotPYEqx7kMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-				},
-				{
-					title: "The Last Man in Europe: A Novel",
-					author: "Dennis Glover",
-					publishedDate: "2017-11-14",
-					thumbnail: "http://books.google.com/books/content?id=E6UxDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+					thumbnail: "http://books.google.com/books/content?id=E6UxDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+					status: "unread"
 				}
 			],
 			searchResults: [],
@@ -75,10 +91,9 @@ class App extends Component {
 
 	render() {
 		const {
-			unreadBooks,
+			books,
 			currBook,
 			searchResults,
-			savedBooks
 		} = this.state;
 
 //		let isCurrBooks = currBook !== '' ? true : false;
@@ -86,13 +101,9 @@ class App extends Component {
 		<div>
 			<h1>Welcome to my bookshelf</h1>
 			<p>You can search for books, add them to one of the bookshelves. Rate and comment</p>
-			<h2>Books to Read</h2>
-			<BookList Books={unreadBooks}/>
-			<h2>Saved Books</h2>
-			<BookList Books={savedBooks}/>
+			<h2>My Book Shelf</h2>
+			<BookList Books={books}/>
 			<Search getBook={this.getBook}/>
-			<button id="moveFromSavedBooksToUnreadBooks">Move Book to Shelf</button>
-			<button id="moveFromUnreadBooksToSavedBooks">Move Book to Saved</button>
 			<DisplaySearchedBook
 				searchedBookResults={searchResults}
 				addBook={this.addBookToShelf}
