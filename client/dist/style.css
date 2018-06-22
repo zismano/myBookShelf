@@ -1,3 +1,39 @@
 body {
-	background: yellow;
+	background: seagreen;
+}
+
+#search {
+	width: 200px;
+}
+
+div .book-found {
+		text-align: center;
+		width: 25%;
+		border: 2px solid black;
+		padding: 4px;
+		margin: 4px;
+}
+
+.book-found h2 {
+	text-decoration: underline;
+}
+
+.book-entry button {
+	color: white;
+}
+
+.book-entry button:nth-of-type(1) {
+	margin-left: 10px;
+}
+
+.read-button {
+	background-color: blue;
+}
+
+.unread-button {
+	background-color: green;
+}
+
+.remove-button {
+	background-color: red;
 }
