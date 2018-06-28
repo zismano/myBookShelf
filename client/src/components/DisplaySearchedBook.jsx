@@ -4,16 +4,6 @@ import {connect} from 'react-redux';
 import {addBook} from '../actions/bookActions';
 
 class DisplaySearchedBook extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-	addBook(index) {
-    console.log(index);
-		// let bookToAdd = createBookObject(this.state.searchResults[index]);
-		// let currBooks = this.state[shelf].push(bookToAdd);
-		// this.setState({ shelf: currBooks });
-	}
 
   render() {
       const searchResults = this.props.searchResults.map((result, i) => {
