@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 import {searchBook} from '../actions/bookActions';
 import DisplaySearchedBook from './DisplaySearchedBook.jsx';
@@ -36,13 +36,13 @@ class Search extends Component {
 	}
 }
 
-Search.PropTypes = {
-		searchBook: PropTypes.func.isRequired,
-		books: PropTypes.array.isRequires
+Search.propTypes = {
+		searchBook: propTypes.func.isRequired,
+		books: propTypes.array.isRequires
 }
 
 const mapStateToProps = state => ({
-	books: state.books.searchedItem.data
+	books: state.books.searchResults.data
 })
 
 export default connect(mapStateToProps, {searchBook})(Search);
