@@ -38,10 +38,11 @@ const findBookFromAPI = (title, author) => {
 
 const createBookObject = book => {
 	let bookObject = {
-		title: book.volumeInfo.title,
-		author: book.volumeInfo.authors[0],
-		publishedDate: book.volumeInfo.publishedDate,
-		thumbnail: book.volumeInfo.imageLinks.thumbnail,
+		title: book.title,
+		author: book.authors[0],
+		publishedDate: book.publishedDate,
+		thumbnail: book.imageLinks.thumbnail,
+		status: "unknown"
 	}
 	return bookObject;
 }
