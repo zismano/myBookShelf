@@ -1,4 +1,4 @@
-import {DISPLAY_BOOKS, SEARCH_BOOK, ADD_BOOK} from './types';
+import {FETCH_BOOKS, SEARCH_BOOK, ADD_BOOK} from './types';
 
 const axios = require('axios');
 
@@ -19,10 +19,18 @@ export function searchBook(title, author) {
 
 export function addBook(book) {
   return function(dispatch) {
-      console.log('add action');
       return dispatch({
         type: ADD_BOOK,
         payload: book
       })
+  }
+}
+
+export function fetchBooks() {
+  return function(dispatch) {
+    console.log('fetch books');
+    return dispatch({
+      type: FETCH_BOOKS,
+    })
   }
 }
