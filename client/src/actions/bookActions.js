@@ -16,3 +16,13 @@ export function searchBook(title, author) {
       }))
   }
 }
+
+export function addBook(book) {
+  return function(dispatch) {
+      console.log('add action');
+      return dispatch({
+        type: ADD_BOOK,
+        payload: book
+      })
+  }
+}
