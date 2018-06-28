@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
+import {addBook} from '../actions/bookActions';
 
 class DisplaySearchedBook extends Component {
   constructor(props) {
@@ -33,7 +35,7 @@ class DisplaySearchedBook extends Component {
           <br></br>
           <button
           id="addToMyBooks"
-          onClick={(e) => this.addBook(i)}>
+          onClick={() => this.props.addBook(volume)}>
           Add Book to My Book Shelf
           </button>
           </div>
@@ -48,4 +50,4 @@ class DisplaySearchedBook extends Component {
   }
 }
 
-export default DisplaySearchedBook;
+export default connect(null, {addBook})(DisplaySearchedBook);
