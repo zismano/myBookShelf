@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import {searchBook} from '../actions/bookActions';
 import DisplaySearchedBook from './DisplaySearchedBook.jsx';
@@ -26,23 +26,14 @@ class Search extends Component {
 					onClick={() => this.props.searchBook(title.value, author.value)}>
 					Find
 				</button>
-				{this.props.books ? (
-					<DisplaySearchedBook searchResults={this.props.books}/>
-				) : (
-					<div></div>
-				)}
+					<DisplaySearchedBook/>
 			</div>
 		)
 	}
 }
 
 Search.propTypes = {
-		searchBook: propTypes.func.isRequired,
-		books: propTypes.array.isRequires
+		searchBook: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state => ({
-	books: state.books.searchResults.data
-})
-
-export default connect(mapStateToProps, {searchBook})(Search);
+export default connect(null, {searchBook})(Search);
