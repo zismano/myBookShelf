@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
-import {addBook} from '../actions/bookActions';
+import {addBook, fetchSearchResults} from '../actions/bookActions';
 
 class DisplaySearchedBook extends Component {
 
   render() {
-      const searchResults = this.props.searchResults.map((result, i) => {
+    let searchResults;
+    if (this.props.books.data) {
+      searchResults = this.props.books.data.map((result, i) => {
         let volume = result.volumeInfo;
         return (
           <div key={i}>
@@ -24,13 +27,16 @@ class DisplaySearchedBook extends Component {
           <img src={volume.imageLinks.thumbnail}></img>
           <br></br>
           <button
-          id="addToMyBooks"
-          onClick={() => this.props.addBook(volume)}>
-          Add Book to My Book Shelf
+            id="addToMyBooks"
+            onClick={() => this.props.addBook(volume)}>
+            Add Book to My Book Shelf
           </button>
           </div>
         )
       })
+    } else {
+      searchResults = <div/>
+    }
 
     return (
       <div>
@@ -40,4 +46,13 @@ class DisplaySearchedBook extends Component {
   }
 }
 
-export default connect(null, {addBook})(DisplaySearchedBook);
+DisplaySearchedBook.propTypes = {
+  addBook: PropTypes.func.isRequired,
+  books: PropTypes.array.isRequired
+}
+
+const mapStateToProps = state => ({
+	books: state.books.searchResults
+})
+
+export default connect(mapStateToProps, {addBook, fetchSearchResults})(DisplaySearchedBook);
