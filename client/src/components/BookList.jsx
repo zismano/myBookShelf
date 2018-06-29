@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
 import {fetchBooks} from '../actions/bookActions';
 
@@ -34,6 +35,11 @@ class BookList extends Component {
 const mapStateToProps = state => ({
 	books: state.books.items
 })
+
+BookList.propTypes = {
+	fetchBooks: PropTypes.func.isRequired,
+	books: PropTypes.array.isRequired
+}
 
 export default connect(mapStateToProps, {fetchBooks})(BookList);
 
