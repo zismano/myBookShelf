@@ -6,13 +6,18 @@ import {fetchBooks, removeBook} from '../actions/bookActions';
 
 class BookList extends Component {
 
+	toggleBookDetails(index) {
+		let divs = document.querySelectorAll(".extra-details");
+		divs[index].classList.toggle("invisible-div");
+	}
+
 	render() {
-		console.log(this.props.books);
 		const books = this.props.books.map((book, i) => {
+			const volume = book.volumeInfo;
 			return (
 				<div className="book-entry" key={i}>
-					<li>
-						{book.volumeInfo.title} By {book.volumeInfo.authors[0]}
+					<li onClick={(e) => this.toggleBookDetails(i)}>
+						{volume.title} By {volume.authors[0]}
 						<button className="read-button">Read</button>
 						<button className="unread-button">Unread</button>
 						<button
@@ -20,6 +25,25 @@ class BookList extends Component {
 							onClick={() => this.props.removeBook(book)}>
 							Remove
 						</button>
+						<div className="extra-details invisible-div">
+							{volume.categories ? (
+								<h4>Categories: {volume.categories[0]}</h4>
+							) : (
+								<h4/>
+							)}
+							{volume.description ? (
+								<h4 className="book-description">{volume.description}</h4>
+							) : (
+									<h4/>
+							)}
+							{volume.averageRating && volume.ratingsCount ? (
+								<h4>Rating: {volume.averageRating}/5 ({volume.ratingsCount})</h4>
+							) : (
+								<h4/>
+							)}
+							<h4>Published: {volume.publishedDate}</h4>
+							<img src={volume.imageLinks.thumbnail}></img>
+						</div>
 					</li>
 				</div>
 			);
@@ -46,16 +70,3 @@ BookList.propTypes = {
 }
 
 export default connect(mapStateToProps, {fetchBooks, removeBook})(BookList);
-
-// {this.state.showDetails ? (
-// 	<div>
-// 		<h4>Published: {book.publishedDate}</h4>
-// 		<img src={book.thumbnail}></img>
-// 	</div>
-// ) : (
-// 	<div></div>
-// )}
-
-// <li onClick={() =>
-// 		this.toggleBookDetails({ showDetails: !this.state.showDetails})}
-// >
