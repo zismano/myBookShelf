@@ -21,14 +21,24 @@ class DisplaySearchedBook extends Component {
           {volume.categories ? (
             <h4>Categories: {volume.categories[0]}</h4>
           ) : (
-            <h4></h4>
+            <h4/>
           )}
-          <h4>Published: {volume.publishedDate}</h4>
+          {volume.description ? (
+            <h4 className="book-description">{volume.description}</h4>
+          ) : (
+              <h4/>
+          )}
+          {volume.averageRating && volume.ratingsCount ? (
+            <h4>Rating: {volume.averageRating}/5 ({volume.ratingsCount})</h4>
+          ) : (
+            <h4/>
+          )}
+          <h5>Published: {volume.publishedDate}</h5>
           <img src={volume.imageLinks.thumbnail}></img>
-          <br></br>
+          <br/>
           <button
             id="addToMyBooks"
-            onClick={() => this.props.addBook(volume)}>
+            onClick={() => this.props.addBook(result)}>
             Add Book to My Book Shelf
           </button>
           </div>
