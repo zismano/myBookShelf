@@ -1,4 +1,10 @@
-import {FETCH_BOOKS, FETCH_SEARCH_RESULTS, SEARCH_BOOK, ADD_BOOK} from './types';
+import {
+  FETCH_BOOKS,
+  FETCH_SEARCH_RESULTS,
+  SEARCH_BOOK,
+  ADD_BOOK,
+  REMOVE_BOOK
+} from './types';
 
 const axios = require('axios');
 
@@ -36,9 +42,17 @@ export function fetchBooks() {
 
 export function fetchSearchResults() {
   return function(dispatch) {
-    console.log('fetch search results');
     return dispatch({
       type: FETCH_SEARCH_RESULTS
+    })
+  }
+}
+
+export function removeBook(book) {
+  return function(dispatch) {
+    return dispatch({
+      type: REMOVE_BOOK,
+      payload: book
     })
   }
 }
