@@ -2,25 +2,28 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {fetchBooks} from '../actions/bookActions';
+import {fetchBooks, removeBook} from '../actions/bookActions';
 
 class BookList extends Component {
-	constructor(props) {
-		super(props);
-	}
 
 	render() {
-		const books = this.props.books.map((book, i) => (
-			<div className="book-entry" key={i}>
-				<li onClick={() =>
-						this.setState({ showDetails: !this.state.showDetails})}
-				>{book.title} By {book.author}
-					<button className="read-button">Read</button>
-					<button className="unread-button">Unread</button>
-					<button className="remove-button">Remove</button>
-				</li>
-			</div>
-		))
+		console.log(this.props.books);
+		const books = this.props.books.map((book, i) => {
+			return (
+				<div className="book-entry" key={i}>
+					<li>
+						{book.volumeInfo.title} By {book.volumeInfo.authors[0]}
+						<button className="read-button">Read</button>
+						<button className="unread-button">Unread</button>
+						<button
+							className="remove-button"
+							onClick={() => this.props.removeBook(book)}>
+							Remove
+						</button>
+					</li>
+				</div>
+			);
+		})
 
 		return (
 			<div className="shelf">
@@ -38,10 +41,11 @@ const mapStateToProps = state => ({
 
 BookList.propTypes = {
 	fetchBooks: PropTypes.func.isRequired,
+	removeBook: PropTypes.func.isRequired,
 	books: PropTypes.array.isRequired
 }
 
-export default connect(mapStateToProps, {fetchBooks})(BookList);
+export default connect(mapStateToProps, {fetchBooks, removeBook})(BookList);
 
 // {this.state.showDetails ? (
 // 	<div>
@@ -51,3 +55,7 @@ export default connect(mapStateToProps, {fetchBooks})(BookList);
 // ) : (
 // 	<div></div>
 // )}
+
+// <li onClick={() =>
+// 		this.toggleBookDetails({ showDetails: !this.state.showDetails})}
+// >
