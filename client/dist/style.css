@@ -37,3 +37,11 @@ div .book-found {
 .remove-button {
 	background-color: red;
 }
+
+.invisible-div {
+	display:none;
+}
+
+.book-description {
+	width: 30%
+}
