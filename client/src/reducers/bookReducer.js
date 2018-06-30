@@ -1,7 +1,8 @@
 import {
   SEARCH_BOOK,
   ADD_BOOK,
-  REMOVE_BOOK
+  REMOVE_BOOK,
+  CHANGE_STATUS_OF_BOOK
 } from '../actions/types';
 
 import {createBookObject} from '../../../helpers/helpers';
@@ -9,27 +10,35 @@ import {createBookObject} from '../../../helpers/helpers';
 const initialState = {
   items: [
     {
-      id: "3x9ybla",
+      id: "kotPYEqx7kM",
+      status: "read",
       volumeInfo: {
         title: "1984",
+        averageRating: 4.5,
+        categories: ["Fiction"],
+        ratingsCount: 71,
         authors: ["George Orwell"],
+        description: "bla bla bla bla",
         publishedDate: "1983-10-17",
         imageLinks: {
           thumbnail: "http://books.google.com/books/content?id=kotPYEqx7kMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
         },
-        status: "read"
       }
     },
     {
       id: "9xy3oA",
+      status: "unread",
       volumeInfo: {
         title: ["The Last Man in Europe: A Novel"],
+        averageRating: 3.2,
+        categories: ["Sci-Fi"],
+        ratingsCount: 83,
+        description: "bla bla and yet bla",
         authors: ["Dennis Glover"],
         publishedDate: "2017-11-14",
         imageLinks: {
           thumbnail: "http://books.google.com/books/content?id=E6UxDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
         },
-        status: "unread"
       }
     }
   ],
@@ -57,6 +66,15 @@ export default function(state = initialState, action) {
         if (book.id !== action.payload.id) {
           return book;
         }
+      });
+      return newState;
+    case CHANGE_STATUS_OF_BOOK:
+      newState = Object.assign({}, state);
+      newState.items = newState.items.map(book => {
+        if (book.id === action.payload.book.id) {
+          book.status = action.payload.status;
+        }
+        return book;
       });
       return newState;
     default:
