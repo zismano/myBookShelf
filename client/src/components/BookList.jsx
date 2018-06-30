@@ -2,26 +2,43 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {fetchBooks, removeBook} from '../actions/bookActions';
+import {
+	fetchBooks,
+	removeBook,
+	changeStatusOfBook
+} from '../actions/bookActions';
 
 class BookList extends Component {
 
-	toggleBookDetails(index) {
-		let divs = document.querySelectorAll(".extra-details");
-		divs[index].classList.toggle("invisible-div");
+	toggleBookDetails(e, index) {
+		if (e.target.value !== 'button') {	// when click on read/unread/remove don't toggle details
+			let divs = document.querySelectorAll(".extra-details");
+			divs[index].classList.toggle("invisible-div");
+		}
 	}
 
 	render() {
 		const books = this.props.books.map((book, i) => {
 			const volume = book.volumeInfo;
 			return (
-				<div className="book-entry" key={i}>
-					<li onClick={(e) => this.toggleBookDetails(i)}>
+				<div className={`book-entry ${book.status}`} key={i}>
+					<li onClick={(e) => this.toggleBookDetails(e, i)}>
 						{volume.title} By {volume.authors[0]}
-						<button className="read-button">Read</button>
-						<button className="unread-button">Unread</button>
+						<button
+							className="read-button"
+							value="button"
+							onClick={() => this.props.changeStatusOfBook(book, 'read')}>
+							Read
+						</button>
+						<button
+							className="unread-button"
+							value="button"
+							onClick={() => this.props.changeStatusOfBook(book, 'unread')}>
+							Unread
+						</button>
 						<button
 							className="remove-button"
+							value="button"
 							onClick={() => this.props.removeBook(book)}>
 							Remove
 						</button>
@@ -66,7 +83,12 @@ const mapStateToProps = state => ({
 BookList.propTypes = {
 	fetchBooks: PropTypes.func.isRequired,
 	removeBook: PropTypes.func.isRequired,
+	changeStatusOfBook: PropTypes.func.isRequired,
 	books: PropTypes.array.isRequired
 }
 
-export default connect(mapStateToProps, {fetchBooks, removeBook})(BookList);
+export default connect(mapStateToProps, {
+	fetchBooks,
+	removeBook,
+	changeStatusOfBook
+})(BookList);
