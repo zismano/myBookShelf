@@ -3,7 +3,8 @@ import {
   FETCH_SEARCH_RESULTS,
   SEARCH_BOOK,
   ADD_BOOK,
-  REMOVE_BOOK
+  REMOVE_BOOK,
+  CHANGE_STATUS_OF_BOOK,
 } from './types';
 
 const axios = require('axios');
@@ -53,6 +54,18 @@ export function removeBook(book) {
     return dispatch({
       type: REMOVE_BOOK,
       payload: book
+    })
+  }
+}
+
+export function changeStatusOfBook(book, status) {
+  return function(dispatch) {
+    return dispatch({
+      type: CHANGE_STATUS_OF_BOOK,
+      payload: {
+        book,
+        status
+      }
     })
   }
 }
