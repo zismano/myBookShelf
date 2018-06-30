@@ -45,3 +45,11 @@ div .book-found {
 .book-description {
 	width: 30%
 }
+
+div .read {
+	color: blue;
+}
+
+div .unread {
+	color: green;
+}
