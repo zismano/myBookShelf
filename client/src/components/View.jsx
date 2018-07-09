@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
 import {changeViewOfReadStatus} from '../actions/bookActions';
 
@@ -12,7 +13,6 @@ class View extends Component {
   render() {
     return (
       <div>
-        <br/><br/>
         <div className="book-entry">
           <button
             className="read-button"
@@ -33,6 +33,10 @@ class View extends Component {
       </div>
     );
   }
+}
+
+View.propTypes = {
+    changeViewOfReadStatus: PropTypes.func.isRequired,
 }
 
 export default connect(null, {changeViewOfReadStatus})(View);
