@@ -11,8 +11,9 @@ class DisplaySearchedBook extends Component {
     if (this.props.books.data) {
       searchResults = this.props.books.data.map((result, i) => {
         let volume = result.volumeInfo;
+        const uuidv4 = require('uuid/v4');
         return (
-          <div key={i}>
+          <div key={uuidv4()}>
           {volume.authors ? (
             <h3>{i + 1}. {volume.title} By {volume.authors[0]}</h3>
           ) : (
