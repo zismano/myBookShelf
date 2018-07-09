@@ -3,7 +3,8 @@ import {
   ADD_BOOK,
   REMOVE_BOOK,
   CHANGE_STATUS_OF_BOOK,
-  CHANGE_VIEW_OF_READ_STATUS
+  CHANGE_VIEW_OF_READ_STATUS,
+  TOGGLE_BOOK_DETAILS
 } from '../actions/types';
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
     {
       id: "kotPYEqx7kM",
       isRead: true,
+      areDetailsShown: false,
       volumeInfo: {
         title: "1984",
         averageRating: 4.5,
@@ -33,6 +35,7 @@ const initialState = {
     {
       id: "9xy3oA",
       isRead: false,
+      areDetailsShown: false,
       volumeInfo: {
         title: ["The Last Man in Europe: A Novel"],
         averageRating: 3.2,
@@ -89,6 +92,15 @@ export default function(state = initialState, action) {
         allBooks: false
       };
       newState.view[action.payload] = true;
+      return newState;
+    case TOGGLE_BOOK_DETAILS:
+      newState = Object.assign({}, state);
+      newState.items = newState.items.map(book => {
+        if (book.id === action.payload.id) {
+          book.areDetailsShown = !book.areDetailsShown;
+        }
+        return book;
+      });
       return newState;
     default:
       return state;
