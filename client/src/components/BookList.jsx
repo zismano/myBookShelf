@@ -19,12 +19,12 @@ class BookList extends Component {
 	}
 
 	render() {
-		console.log(this.props);
 		const books = this.props.books.map((book, i) => {
 			if (this.props.view.allBooks || (book.isRead && this.props.view.read) || (!book.isRead && this.props.view.unread)) {
 				const volume = book.volumeInfo;
+				const uuidv4 = require('uuid/v4');
 				return (
-					<div className={book.isRead ? 'book-entry read' : 'book-entry unread'} key={i}>
+					<div className='book-entry' key={uuidv4()}>
 						<li onClick={(e) => this.toggleBookDetails(e, i)}>
 							{volume.title} By {volume.authors[0]}
 							<button
