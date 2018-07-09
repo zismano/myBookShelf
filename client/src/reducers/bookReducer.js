@@ -6,8 +6,6 @@ import {
   CHANGE_VIEW_OF_READ_STATUS
 } from '../actions/types';
 
-import {createBookObject} from '../../../helpers/helpers';
-
 const initialState = {
   view: {
     read: false,
@@ -62,8 +60,6 @@ export default function(state = initialState, action) {
 
     case ADD_BOOK:
       newState = Object.assign({}, state);
-  //    let bookToAdd = createBookObject(action.payload);
-  //    newState.items = state.items.concat([bookToAdd]);
       newState.items = state.items.concat([action.payload]);
       console.log(newState.items);
       return newState;
