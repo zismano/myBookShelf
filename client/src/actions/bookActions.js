@@ -5,6 +5,7 @@ import {
   ADD_BOOK,
   REMOVE_BOOK,
   CHANGE_STATUS_OF_BOOK,
+  CHANGE_VIEW_OF_READ_STATUS
 } from './types';
 
 const axios = require('axios');
@@ -58,14 +59,23 @@ export function removeBook(book) {
   }
 }
 
-export function changeStatusOfBook(book, status) {
+export function changeStatusOfBook(book, isRead) {
   return function(dispatch) {
     return dispatch({
       type: CHANGE_STATUS_OF_BOOK,
       payload: {
         book,
-        status
+        isRead
       }
+    })
+  }
+}
+
+export function changeViewOfReadStatus(status) {
+  return function(dispatch) {
+    return dispatch({
+      type: CHANGE_VIEW_OF_READ_STATUS,
+      payload: status
     })
   }
 }
