@@ -2,16 +2,23 @@ import {
   SEARCH_BOOK,
   ADD_BOOK,
   REMOVE_BOOK,
-  CHANGE_STATUS_OF_BOOK
+  CHANGE_STATUS_OF_BOOK,
+  CHANGE_VIEW_OF_READ_STATUS
 } from '../actions/types';
 
 import {createBookObject} from '../../../helpers/helpers';
 
 const initialState = {
+  view: {
+    read: false,
+    unread: false,
+    allBooks: true
+  },
+
   items: [
     {
       id: "kotPYEqx7kM",
-      status: "read",
+      isRead: true,
       volumeInfo: {
         title: "1984",
         averageRating: 4.5,
@@ -27,7 +34,7 @@ const initialState = {
     },
     {
       id: "9xy3oA",
-      status: "unread",
+      isRead: false,
       volumeInfo: {
         title: ["The Last Man in Europe: A Novel"],
         averageRating: 3.2,
@@ -42,6 +49,7 @@ const initialState = {
       }
     }
   ],
+
   searchResults: []  // array to render various results of searched book
 }
 
@@ -72,10 +80,19 @@ export default function(state = initialState, action) {
       newState = Object.assign({}, state);
       newState.items = newState.items.map(book => {
         if (book.id === action.payload.book.id) {
-          book.status = action.payload.status;
+          book.isRead = action.payload.isRead;
         }
         return book;
       });
+      return newState;
+    case CHANGE_VIEW_OF_READ_STATUS:
+      newState = Object.assign({}, state);
+      newState.view = {
+        read: false,
+        unread: false,
+        allBooks: false
+      };
+      newState.view[action.payload] = true;
       return newState;
     default:
       return state;
