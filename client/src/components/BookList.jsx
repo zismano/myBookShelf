@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
+import Review from './Review.jsx';
+
 import {
 	fetchBooks,
 	removeBook,
@@ -16,7 +18,8 @@ class BookList extends Component {
 	}
 
 	checkClickAndToggleBookDetails(e, book) {
-		if (e.target.value !== 'button') {	// when click on read/unread/remove don't toggle details
+		console.dir(e.target);
+		if (e.target.value !== 'button' && e.target.localName !== 'select' && e.target.localName !== 'textarea') {	// when click on read/unread/remove don't toggle details
 			this.props.toggleBookDetails(book);
 		}
 	}
@@ -67,6 +70,8 @@ class BookList extends Component {
 									)}
 									<h4>Published: {volume.publishedDate}</h4>
 									<img src={volume.imageLinks.thumbnail}></img>
+									<br/>
+									<Review/>
 								</div>
 							) : (<div></div>)}
 						</li>
