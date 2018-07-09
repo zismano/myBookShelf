@@ -39,7 +39,9 @@ class DisplaySearchedBook extends Component {
           <br/>
           <button
             id="addToMyBooks"
-            onClick={() => this.props.addBook(result)}>
+            onClick={() => {
+              result.areDetailsShown = false;
+              this.props.addBook(result)}}>
             Add Book to My Book Shelf
           </button>
           </div>
